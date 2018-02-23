@@ -13,88 +13,96 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Fiver.Security.AspIdentity
 {
-    public class Startup
-    {
-        private readonly IConfiguration _configuration;
+   public class Startup
+   {
+      private readonly IConfiguration _configuration;
 
-        public Startup(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+      public Startup(IConfiguration configuration)
+      {
+         _configuration = configuration;
+      }
 
-        public void ConfigureServices(
-            IServiceCollection services)
-        {
-            services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseSqlServer(_configuration["DB_CONN"]));
+      public void ConfigureServices(
+          IServiceCollection services)
+      {
+         services.AddDbContext<AppIdentityDbContext>(options =>
+             options.UseSqlServer(_configuration["DB_CONN"]));
 
-            services.AddIdentity<AppIdentityUser, AppIdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>()
-                .AddDefaultTokenProviders();
+         services.AddIdentity<AppIdentityUser, AppIdentityRole>()
+             .AddEntityFrameworkStores<AppIdentityDbContext>()
+             .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(options =>
+         services.Configure<IdentityOptions>(options =>
+         {
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 6;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+
+            options.Lockout.AllowedForNewUsers = true;
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+            options.Lockout.MaxFailedAccessAttempts = 5;
+
+            options.User.RequireUniqueEmail = true;
+
+            options.SignIn.RequireConfirmedEmail = true;
+            options.SignIn.RequireConfirmedPhoneNumber = false;
+         });
+
+         services.ConfigureApplicationCookie(options =>
+         {
+            options.LoginPath = "/Security/Login";
+            options.LogoutPath = "/Security/Logout";
+            options.AccessDeniedPath = "/Security/AccessDenied";
+            options.SlidingExpiration = true;
+            options.Cookie = new CookieBuilder
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
+                  //Domain = "",
+                  HttpOnly = true,
+               Name = ".Fiver.Security.Cookie",
+               Path = "/",
+               SameSite = SameSiteMode.Lax,
+               SecurePolicy = CookieSecurePolicy.SameAsRequest
+            };
+         });
 
-                options.Lockout.AllowedForNewUsers = true;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
+         services.AddTransient<IEmailSender, EmailSender>();
 
-                options.User.RequireUniqueEmail = true;
+         services.AddMvc();
 
-                options.SignIn.RequireConfirmedEmail = true;
-                options.SignIn.RequireConfirmedPhoneNumber = false;
-            });
+         services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
+         services.AddResponseCompression(options => options.EnableForHttps = true);
+      }
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/Security/Login";
-                options.LogoutPath = "/Security/Logout";
-                options.AccessDeniedPath = "/Security/AccessDenied";
-                options.SlidingExpiration = true;
-                options.Cookie = new CookieBuilder
-                {
-                    //Domain = "",
-                    HttpOnly = true,
-                    Name = ".Fiver.Security.Cookie",
-                    Path = "/",
-                    SameSite = SameSiteMode.Lax,
-                    SecurePolicy = CookieSecurePolicy.SameAsRequest
-                };
-            });
+      public void Configure(
+          IApplicationBuilder app,
+          IHostingEnvironment env)
+      {
+         if (env.IsDevelopment())
+         {
+            app.UseBrowserLink();
+            app.UseDeveloperExceptionPage();
+         }
+         else
+         {
+            app.UseExceptionHandler("/Home/Error");
+            app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
+            app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
+         }
 
-            services.AddTransient<IEmailSender, EmailSender>();
+         //Registered before static files to always set header
+         app.UseXContentTypeOptions();
+         app.UseReferrerPolicy(opts => opts.NoReferrer());
+         app.UseResponseCompression();
+         app.UseAuthentication();
+         app.UseStaticFiles();
 
-            services.AddMvc();
+         //Registered after static files, to set headers for dynamic content.
+         app.UseXfo(xfo => xfo.Deny());
+         app.UseRedirectValidation(); //Register this earlier if there's middleware that might redirect.
 
-            services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
-            services.AddResponseCompression(options => options.EnableForHttps = true);
-        }
-
-        public void Configure(
-            IApplicationBuilder app,
-            IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseStatusCodePagesWithRedirects("/Home/Error/{0}");
-                app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
-            }
-
-            app.UseResponseCompression();
-            app.UseAuthentication();
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-        }
-    }
+         app.UseMvcWithDefaultRoute();
+      }
+   }
 }
