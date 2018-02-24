@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 
-namespace Fiver.Security.AspIdentity
+namespace CoreCrm
 {
    public class Program
    {

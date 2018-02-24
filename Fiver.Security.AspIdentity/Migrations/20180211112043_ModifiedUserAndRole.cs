@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
-namespace Fiver.Security.AspIdentity.Migrations
+namespace CoreCrm.Migrations
 {
     public partial class ModifiedUserAndRole : Migration
     {

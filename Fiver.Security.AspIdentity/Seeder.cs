@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Fiver.Security.AspIdentity.Core;
-using Fiver.Security.AspIdentity.Models.Core;
+using CoreCrm.Core;
+using CoreCrm.Models.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fiver.Security.AspIdentity
+namespace CoreCrm
 {
     public static class Seeder
     {

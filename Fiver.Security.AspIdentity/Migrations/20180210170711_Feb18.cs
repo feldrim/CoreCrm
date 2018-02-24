@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Fiver.Security.AspIdentity.Migrations
+namespace CoreCrm.Migrations
 {
     public partial class Feb18 : Migration
     {

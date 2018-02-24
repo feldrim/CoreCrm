@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO.Compression;
-using Fiver.Security.AspIdentity.Core;
-using Fiver.Security.AspIdentity.Core.Email;
-using Fiver.Security.AspIdentity.Models.Core;
+using CoreCrm.Core;
+using CoreCrm.Core.Email;
+using CoreCrm.Models.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Fiver.Security.AspIdentity
+namespace CoreCrm
 {
    public class Startup
    {

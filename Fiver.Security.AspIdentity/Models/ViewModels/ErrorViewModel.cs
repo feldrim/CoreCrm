@@ -1,4 +1,4 @@
-﻿namespace Fiver.Security.AspIdentity.Models.ViewModels
+﻿namespace CoreCrm.Models.ViewModels
 {
     public class ErrorViewModel
     {

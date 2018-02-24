@@ -1,8 +1,8 @@
-﻿using Fiver.Security.AspIdentity.Controllers;
+﻿using CoreCrm.Controllers;
 using FluentAssertions.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Fiver.Security.AspIdentity.Tests
+namespace CoreCrm.Tests
 {
    [TestClass]
    public class HomeControllerTests

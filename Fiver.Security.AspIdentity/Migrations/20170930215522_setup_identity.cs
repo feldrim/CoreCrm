@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Fiver.Security.AspIdentity.Migrations
+namespace CoreCrm.Migrations
 {
     public partial class setup_identity : Migration
     {

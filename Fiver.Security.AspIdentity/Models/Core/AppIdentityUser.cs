@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Fiver.Security.AspIdentity.Models.Core
+namespace CoreCrm.Models.Core
 {
     public class AppIdentityUser : IdentityUser
     {

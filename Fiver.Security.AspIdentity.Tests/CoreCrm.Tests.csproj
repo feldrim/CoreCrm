@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fiver.Security.AspIdentity\Fiver.Security.AspIdentity.csproj" />
+    <ProjectReference Include="..\Fiver.Security.AspIdentity\CoreCrm.csproj" />
   </ItemGroup>
 
 </Project>

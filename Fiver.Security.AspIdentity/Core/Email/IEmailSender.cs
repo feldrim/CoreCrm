@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Fiver.Security.AspIdentity.Core.Email
+namespace CoreCrm.Core.Email
 {
     public interface IEmailSender
     {

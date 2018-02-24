@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using Fiver.Security.AspIdentity.Models.ViewModels;
+using CoreCrm.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fiver.Security.AspIdentity.Controllers
+namespace CoreCrm.Controllers
 {
     public class HomeController : Controller
     {

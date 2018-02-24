@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Fiver.Security.AspIdentity.Core.Email;
-using Fiver.Security.AspIdentity.Models.Core;
+using CoreCrm.Core.Email;
+using CoreCrm.Models.Core;
+using CoreCrm.Models.ViewModels.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fiver.Security.AspIdentity.Controllers
+namespace CoreCrm.Controllers
 {
     [Authorize]
     public class SecurityController : Controller

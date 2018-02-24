@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Fiver.Security.AspIdentity.Models.ViewModels.Security
+namespace CoreCrm.Models.ViewModels.Security
 {
     public class LoginViewModel
     {

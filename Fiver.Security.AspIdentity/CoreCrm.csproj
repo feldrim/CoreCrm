@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <StartupObject>Fiver.Security.AspIdentity.Program</StartupObject>
+    <StartupObject>CoreCrm.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>

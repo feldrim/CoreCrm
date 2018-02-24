@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using Fiver.Security.AspIdentity.Models.Core;
+using CoreCrm.Models.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Fiver.Security.AspIdentity.Controllers
+namespace CoreCrm.Controllers
 {
     [Authorize]
     public class RoleController : Controller
