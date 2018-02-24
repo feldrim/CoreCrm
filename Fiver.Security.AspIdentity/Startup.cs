@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 namespace Fiver.Security.AspIdentity
 {
@@ -58,8 +59,8 @@ namespace Fiver.Security.AspIdentity
             options.SlidingExpiration = true;
             options.Cookie = new CookieBuilder
             {
-                  //Domain = "",
-                  HttpOnly = true,
+               //Domain = "",
+               HttpOnly = true,
                Name = ".Fiver.Security.Cookie",
                Path = "/",
                SameSite = SameSiteMode.Lax,
@@ -94,6 +95,14 @@ namespace Fiver.Security.AspIdentity
          //Registered before static files to always set header
          app.UseXContentTypeOptions();
          app.UseReferrerPolicy(opts => opts.NoReferrer());
+         app.UseCsp(opt => opt
+            .DefaultSources(s => s.Self())
+            .FontSources(s => s.Self().CustomSources("fonts.gstatic.com"))
+            .StyleSources(s => s.Self().CustomSources("fonts.googleapis.com").UnsafeInline()) //TODO: Remove UnsafeInline when Nwebsec Nonce fixed.
+            .ScriptSources(s => s.Self().CustomSources("cdnjs.cloudflare.com", "code.jquery.com"))
+            .ImageSources(s => s.Self().CustomSources("data:"))
+         );
+
          app.UseResponseCompression();
          app.UseAuthentication();
          app.UseStaticFiles();
@@ -101,6 +110,9 @@ namespace Fiver.Security.AspIdentity
          //Registered after static files, to set headers for dynamic content.
          app.UseXfo(xfo => xfo.Deny());
          app.UseRedirectValidation(); //Register this earlier if there's middleware that might redirect.
+         app.UseXDownloadOptions();
+         app.UseXRobotsTag(options => options.NoIndex().NoFollow());
+         app.UseXXssProtection(options => options.EnabledWithBlockMode());
 
          app.UseMvcWithDefaultRoute();
       }
