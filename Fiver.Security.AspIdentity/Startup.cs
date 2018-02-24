@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 namespace Fiver.Security.AspIdentity
 {
@@ -24,14 +23,14 @@ namespace Fiver.Security.AspIdentity
       }
 
       public void ConfigureServices(
-          IServiceCollection services)
+         IServiceCollection services)
       {
          services.AddDbContext<AppIdentityDbContext>(options =>
-             options.UseSqlServer(_configuration["DB_CONN"]));
+            options.UseSqlServer(_configuration["DB_CONN"]));
 
          services.AddIdentity<AppIdentityUser, AppIdentityRole>()
-             .AddEntityFrameworkStores<AppIdentityDbContext>()
-             .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
 
          services.Configure<IdentityOptions>(options =>
          {
@@ -77,8 +76,8 @@ namespace Fiver.Security.AspIdentity
       }
 
       public void Configure(
-          IApplicationBuilder app,
-          IHostingEnvironment env)
+         IApplicationBuilder app,
+         IHostingEnvironment env)
       {
          if (env.IsDevelopment())
          {
@@ -98,7 +97,9 @@ namespace Fiver.Security.AspIdentity
          app.UseCsp(opt => opt
             .DefaultSources(s => s.Self())
             .FontSources(s => s.Self().CustomSources("fonts.gstatic.com"))
-            .StyleSources(s => s.Self().CustomSources("fonts.googleapis.com").UnsafeInline()) //TODO: Remove UnsafeInline when Nwebsec Nonce fixed.
+            .StyleSources(s =>
+               s.Self().CustomSources("fonts.googleapis.com")
+                  .UnsafeInline()) //TODO: Remove UnsafeInline when Nwebsec Nonce fixed.
             .ScriptSources(s => s.Self().CustomSources("cdnjs.cloudflare.com", "code.jquery.com"))
             .ImageSources(s => s.Self().CustomSources("data:"))
          );
