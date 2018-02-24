@@ -61,7 +61,7 @@ namespace CoreCrm
             {
                //Domain = "",
                HttpOnly = true,
-               Name = ".Fiver.Security.Cookie",
+               Name = ".Security.Cookie",
                Path = "/",
                SameSite = SameSiteMode.Lax,
                SecurePolicy = CookieSecurePolicy.SameAsRequest
