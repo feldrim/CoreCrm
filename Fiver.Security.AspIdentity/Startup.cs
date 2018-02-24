@@ -1,7 +1,8 @@
 ﻿using System;
 using System.IO.Compression;
-using Fiver.Security.AspIdentity.Services.Email;
-using Fiver.Security.AspIdentity.Services.Identity;
+using Fiver.Security.AspIdentity.Core;
+using Fiver.Security.AspIdentity.Core.Email;
+using Fiver.Security.AspIdentity.Models.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

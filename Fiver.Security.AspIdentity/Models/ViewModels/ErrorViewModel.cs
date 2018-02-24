@@ -1,4 +1,4 @@
-﻿namespace Fiver.Security.AspIdentity.Models
+﻿namespace Fiver.Security.AspIdentity.Models.ViewModels
 {
     public class ErrorViewModel
     {

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Fiver.Security.AspIdentity.Services.Identity;
+using Fiver.Security.AspIdentity.Models.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

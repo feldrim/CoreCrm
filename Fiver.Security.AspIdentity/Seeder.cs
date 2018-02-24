@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Fiver.Security.AspIdentity.Services.Identity;
+using Fiver.Security.AspIdentity.Core;
+using Fiver.Security.AspIdentity.Models.Core;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

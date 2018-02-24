@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Fiver.Security.AspIdentity.Models.Security;
-using Fiver.Security.AspIdentity.Services.Email;
-using Fiver.Security.AspIdentity.Services.Identity;
+using Fiver.Security.AspIdentity.Core.Email;
+using Fiver.Security.AspIdentity.Models.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

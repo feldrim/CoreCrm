@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Fiver.Security.AspIdentity.Models;
+using Fiver.Security.AspIdentity.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fiver.Security.AspIdentity.Controllers

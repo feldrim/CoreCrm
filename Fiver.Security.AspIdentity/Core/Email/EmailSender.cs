@@ -3,7 +3,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 
-namespace Fiver.Security.AspIdentity.Services.Email
+namespace Fiver.Security.AspIdentity.Core.Email
 {
     public class EmailSender : IEmailSender
     {
